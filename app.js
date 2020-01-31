@@ -5,32 +5,10 @@ const cookieParser = require('cookie-parser');
 const morgan = require('morgan');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-require('./models');
+
+// require('./models');
 const app = express();
 const logger = require('./config/logger');
-
-/**
- * Normalize a port into a number, string, or false.
- */
-
-function normalizePort(val) {
-  const port = parseInt(val, 10);
-
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
-
-  if (port >= 0) {
-    // port number
-    return port;
-  }
-
-  return false;
-}
-
-const port = normalizePort(process.env.PORT || '3000');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -42,8 +20,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// app.use('/', indexRouter);
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {
@@ -60,7 +38,5 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.render('error');
 });
-
-app.set('port', port);
 
 module.exports = app;

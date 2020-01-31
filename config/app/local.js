@@ -8,5 +8,8 @@ module.exports = {
     host: process.env.DATABASE_HOST,
     port: process.env.DATABASE_PORT,
     dialect: 'postgres'
+  },
+  baseUrl: {
+    postService: 'https://jsonplaceholder.typicode.com'
   }
 };
