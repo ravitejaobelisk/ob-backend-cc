@@ -1,0 +1,5 @@
+extends:
+  - airbnb-base
+  - prettier
+rules:
+  import/no-dynamic-require: 0
