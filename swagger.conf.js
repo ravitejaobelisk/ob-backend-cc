@@ -1,10 +1,11 @@
+const config = require(`./config/app/${process.env.NODE_ENV}`);
 const swaggerHeader = {
   info: {
     title: 'OB Backend CC',
     version: '1.0.0',
     description: 'Post Service'
   },
-  host: 'localhost:3000/api/v1',
+  host: `${config.swagger.swaggerBaseUrl}/api/v1`,
   basePath: '/'
 };
 

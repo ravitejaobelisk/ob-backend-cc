@@ -12,5 +12,8 @@ module.exports = {
   },
   baseUrl: {
     postService: 'https://jsonplaceholder.typicode.com'
+  },
+  swagger: {
+    baseUrl: 'localhost:3000'
   }
 };
