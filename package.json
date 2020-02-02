@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "populateDB": "node utils/populateDB.js",
-    "generatedoc": "./node_modules/jsdoc/jsdoc.js -c ./jsdoc.conf  -t ./node_modules/ink-docstrap/template -R README.md -r . -d documentation"
+    "generatedoc": "./node_modules/jsdoc/jsdoc.js -c ./jsdoc.conf  -t ./node_modules/ink-docstrap/template -R README.md -r . -d documentation",
+    "build": "npm run populateDB && npm run generatedoc"
   },
   "dependencies": {
     "app-root-path": "^3.0.0",
