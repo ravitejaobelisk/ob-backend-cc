@@ -12,16 +12,7 @@ const db = {};
 /**
  * Creates a new Sequelize connection
  */
-const sequelize = new Sequelize(
-  config.database.database,
-  config.database.username,
-  config.database.password,
-  {
-    dialect: config.database.dialect,
-    host: config.database.host,
-    port: config.database.port
-  }
-);
+const sequelize = new Sequelize(config.database.databaseUrl);
 
 /**
  * Get all model schema files and create Sequelize Model Instances
