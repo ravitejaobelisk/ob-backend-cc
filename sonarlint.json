@@ -1,0 +1,6 @@
+{
+  "$schema": "https://raw.githubusercontent.com/silverbulleters/sonarqube-inject-vsc/master/schemas/sonarlint.json",
+  "serverId": "sonar.nineleaps.com",
+  "projectKey": "ob-backend-cc",
+  "extends": ["plugin:sonarjs/recommended"]
+}
