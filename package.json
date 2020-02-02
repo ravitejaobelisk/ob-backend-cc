@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "post": "node utils/util.js"
+    "populateDB": "node utils/populateDB.js",
+    "generatedoc": "./node_modules/jsdoc/jsdoc.js -c ./jsdoc.conf  -t ./node_modules/ink-docstrap/template -R README.md -r . -d documentation"
   },
   "dependencies": {
     "app-root-path": "^3.0.0",
@@ -12,6 +13,7 @@
     "debug": "~2.6.9",
     "dotenv": "^8.2.0",
     "express": "~4.16.1",
+    "express-handlebars": "^3.1.0",
     "handlebars": "^4.7.2",
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
@@ -20,12 +22,19 @@
     "pg-hstore": "^2.3.3",
     "request": "^2.88.0",
     "sequelize": "^5.21.3",
+    "swagger-jsdoc": "^3.5.0",
+    "swagger-ui-express": "^4.1.3",
     "winston": "^3.2.1"
   },
   "devDependencies": {
     "eslint": "^6.8.0",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.10.0",
-    "eslint-plugin-import": "^2.20.0"
+    "eslint-plugin-import": "^2.20.0",
+    "ink-docstrap": "^1.3.2",
+    "jsdoc": "^3.6.3"
+  },
+  "engines": {
+    "node": "12.14"
   }
 }

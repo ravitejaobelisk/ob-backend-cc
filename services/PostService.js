@@ -1,17 +1,25 @@
 const request = require('request');
+
 const config = require('../config/app/local');
 const logger = require('../config/logger');
-const postModel = require('../models/index').Post;
+const { Post } = require('../models/index');
 
+/**
+ * Get all the posts from DB with pagination support
+ * @param {*} pagination
+ */
 const getPostsFromDB = async pagination => {
-  const { limit } = pagination;
-  const offset = pagination.page * limit - limit;
-  return postModel.getPosts(limit, offset);
+  return Post.getPosts(pagination);
 };
 
+/**
+ * Get Posts by Id - Wiring
+ * @param {*} postId
+ */
 const getPostById = async postId => {
-  return postModel.getPostById(postId);
+  return Post.getPostById(postId);
 };
+
 /**
  * @function getPosts
  *
@@ -45,8 +53,28 @@ const getPosts = () => {
   });
 };
 
+/**
+ * Populates / syncs database with posts from service
+ */
+const populatePosts = async () => {
+  // get users
+  const posts = await getPosts();
+  // populate users
+  await Post.insertBulkPosts(posts);
+};
+
+/**
+ * Proxy to delete query
+ * Deletes all the posts from db
+ */
+const flushPosts = () => {
+  return Post.flushPosts();
+};
+
 module.exports = {
+  populatePosts,
   getPosts,
   getPostsFromDB,
-  getPostById
+  getPostById,
+  flushPosts
 };

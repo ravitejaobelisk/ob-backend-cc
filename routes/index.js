@@ -1,9 +1,10 @@
 const express = require('express');
 
-const app = express();
+const router = express.Router();
+const postController = require('../controllers/PostController');
 
-/* GET home page. */
-app.use('/users', require('./users'));
-app.use('/posts', require('./posts'));
+/* GET users listing. */
+router.get('/', postController.getPosts);
+router.get('/post/:id', postController.getPostById);
 
-module.exports = app;
+module.exports = router;

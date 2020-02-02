@@ -3,12 +3,12 @@ const postService = require('../services/PostService');
 const AppConstants = require('../constants/AppConstants');
 
 /**
- * Renders all the posts from system
+ * Returns Post list as JSON
  * @param {*} req
  * @param {*} res
  * @param {*} next
  */
-const getPosts = async (req, res, next) => {
+const postsList = async (req, res, next) => {
   try {
     let pagination;
     // set pagination
@@ -23,9 +23,12 @@ const getPosts = async (req, res, next) => {
 
     const posts = await postService.getPostsFromDB(pagination);
 
-    return res.render('postList', { posts });
+    return res.send({
+      status: 'success',
+      data: posts
+    });
   } catch (error) {
-    logger.error('PostController#getPosts :: Error :: ', error);
+    logger.error('APIController#getPosts :: Error :: ', error);
     next(error);
   }
 };
@@ -40,14 +43,18 @@ const getPostById = async (req, res, next) => {
   try {
     const { id } = req.params;
     const post = await postService.getPostById(id);
-    return res.render('postDetail', { post });
+
+    return res.send({
+      status: 'success',
+      data: post
+    });
   } catch (error) {
-    logger.error('PostController#getPostById :: Error :: ', error);
+    logger.error('APIController#getPostById :: Error :: ', error);
     next(error);
   }
 };
 
 module.exports = {
-  getPosts,
+  postsList,
   getPostById
 };

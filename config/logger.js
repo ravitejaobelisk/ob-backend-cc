@@ -1,6 +1,9 @@
 const appRoot = require('app-root-path');
 const winston = require('winston');
 
+/**
+ * Custom logger for OB Backend
+ */
 const logger = winston.createLogger({
   level: 'info',
   format: winston.format.combine(
@@ -13,10 +16,6 @@ const logger = winston.createLogger({
   ),
   defaultMeta: { service: 'ob-post-cc' },
   transports: [
-    //
-    // - Write to all logs with level `info` and below to `quick-start-combined.log`.
-    // - Write all logs error (and below) to `quick-start-error.log`.
-    //
     new winston.transports.File({
       filename: `${appRoot}/logs/ob-post-cc-error.log`,
       level: 'error'
@@ -27,12 +26,18 @@ const logger = winston.createLogger({
   ]
 });
 
+/**
+ * Creating the stream to pipe to app logger (morgan)
+ */
 logger.stream = {
   write(message, encoding) {
     logger.info(message);
   }
 };
 
+/**
+ * Also log to terminal in non-prod environments
+ */
 if (process.env.NODE_ENV !== 'production') {
   logger.add(
     new winston.transports.Console({
